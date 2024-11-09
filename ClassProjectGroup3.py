@@ -1,14 +1,54 @@
+import csv
+from datetime import datetime
+
 ################################################################
 # GROUP MEMBERS: 
 #   - Aldrin Amistoso
-#   -
-#   - 
-#   - 
+#   - Marc Angeles
+#   - Marvin Estrada
+#   - Jesse Garcia
 # ASGT: Project
 # ORGN: CSUB - CMPS 3500 
 # FILE: ClassProjectGroup3.py
 # DATE: 11/31/2024
 ################################################################
+
+def loadData(filename):
+    # Record start time to measure load time
+    start_time = datetime.now()
+    print(f"[{start_time.strftime('%Y-%m-%d %H:%M:%S')}] Starting Script")
+    
+    # Initialize counters for rows and columns
+    row_count = 0
+    col_count = 0
+    
+    # Load data
+    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Loading training data set")
+    try:
+        # Open csv file for reading
+        with open(filename, 'r') as file:
+            csv_reader = csv.reader(file)
+
+            # read header row to get column count
+            headers = next(csv_reader)  
+            col_count = len(headers)
+
+            # iterate over each row to count total rows
+            for row in csv_reader:
+                row_count += 1
+
+        # print total columns and rows read
+        print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Total Columns Read: {col_count}")
+        print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Total Rows Read: {row_count}")
+    
+    except FileNotFoundError:
+        print("Error: File not found. Please ensure the file exists in the specified path.")
+        return
+    
+    # load time calculation
+    load_time = datetime.now() - start_time
+    load_time_seconds = load_time.total_seconds()
+    print(f"\nTime to load is: {load_time_seconds:.2f} seconds\n")
 
 def mainMenu():
     while True:
@@ -23,14 +63,9 @@ def mainMenu():
         choice = input("Select Option: ")
         print("===============================================")
         if choice == '1':
-            print("\nLoading and Cleaning Input data set")
+            print("\nLoading and Cleaning Input data set:")
             print("************************************")
-            print(" Starting Script")
-            print(" Loading training data set")
-            print(" Total Columns Read:")
-            print(" Total Rows Read:")
-            print("\nTime to load is:  ")
-
+            loadData("credit_score_data.csv")
         
         elif choice == '2':
             print("\nProcessing input data set:")
