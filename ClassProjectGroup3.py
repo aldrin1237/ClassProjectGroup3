@@ -1,6 +1,21 @@
 import csv
 from datetime import datetime
 
+# General Packages
+import os
+
+# data hanlding libraries
+import numpy as np
+import pandas as pd
+
+# visulaization libraries
+# import matplotlib.pyplot as plt
+# import seaborn as sns
+
+# extra libraries
+import warnings
+warnings.filterwarnings('ignore')
+
 ################################################################
 # GROUP MEMBERS: 
 #   - Aldrin Amistoso
@@ -12,6 +27,18 @@ from datetime import datetime
 # FILE: ClassProjectGroup3.py
 # DATE: 11/31/2024
 ################################################################
+
+###########Fetch File########################
+# Get the current working directory
+current_dir = os.getcwd() 
+
+# Access a file in the current directory
+file_path = os.path.join(current_dir, "credit_score_data.csv")
+
+# Load Credit Score data
+df = pd.read_csv(file_path) 
+#############################################
+
 
 def loadData(filename):
     # Record start time to measure load time
@@ -50,6 +77,48 @@ def loadData(filename):
     load_time_seconds = load_time.total_seconds()
     print(f"\nTime to load is: {load_time_seconds:.2f} seconds\n")
 
+
+
+def processData():
+    # print("\nProcessing input data set:")
+    # print("**************************")
+    # print(" Performing Data Clean Up")
+
+    # Negatives in columns: Num_of_Loan, Age, Num_of_Delayed_Payment
+
+    print("Option 2\n")
+
+    # Drop "Name" column
+    df.drop(columns = ['Name'], inplace = True)
+    
+    # Clean "Age" elements by removing underscores
+    df['Age'] = df['Age'].str.replace('_', '')
+    df['Age'] = df['Age'].astype(int)
+
+    # Drop "SSN" Column
+    df.drop(columns = ['SSN'], inplace = True)
+
+    # Replace "Name" placeholder with null
+    df['Occupation'][df['Occupation'] == '_______'] = np.nan
+
+    # Remove underscores in "Annual_Income" column
+    df['Annual_Income'] = df['Annual_Income'].str.replace('_', '')
+    df['Annual_Income'] = df['Annual_Income'].astype(float)
+
+    # Remove underscores in "Num_of_Loan"
+    df['Num_of_Loan'] = df['Num_of_Loan'].str.replace('_', '').astype(int)
+
+    # Remove underscores in "Num_of_Delayed_Payment"
+    temp_series = df['Num_of_Delayed_Payment'][df['Num_of_Delayed_Payment'].notnull()]
+    df['Num_of_Delayed_Payment'] = df['Num_of_Delayed_Payment'].str.replace('_', '').astype(float)
+
+    # Left off on Changed_Credit_Limit
+
+    # print(" Total Rows after cleaning is: ")
+    # print("\nTime to process is: ")
+
+
+
 def mainMenu():
     while True:
         print("===============================================")
@@ -68,11 +137,7 @@ def mainMenu():
             loadData("credit_score_data.csv")
         
         elif choice == '2':
-            print("\nProcessing input data set:")
-            print("**************************")
-            print(" Performing Data Clean Up")
-            print(" Total Rows after cleaning is: ")
-            print("\nTime to process is: ")
+            processData()
     
 
         elif choice == '3':
