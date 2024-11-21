@@ -1,3 +1,15 @@
+################################################################
+# GROUP MEMBERS: 
+#   - Aldrin Amistoso
+#   - Marc Angeles
+#   - Marvin Estrada
+#   - Jesse Garcia
+# ASGT: Project
+# ORGN: CSUB - CMPS 3500 
+# FILE: ClassProjectGroup3.py
+# DATE: 11/31/2024
+################################################################
+
 import csv
 from datetime import datetime
 
@@ -15,18 +27,6 @@ import pandas as pd
 # extra libraries
 import warnings
 warnings.filterwarnings('ignore')
-
-################################################################
-# GROUP MEMBERS: 
-#   - Aldrin Amistoso
-#   - Marc Angeles
-#   - Marvin Estrada
-#   - Jesse Garcia
-# ASGT: Project
-# ORGN: CSUB - CMPS 3500 
-# FILE: ClassProjectGroup3.py
-# DATE: 11/31/2024
-################################################################
 
 ###########Fetch File########################
 # Get the current working directory
