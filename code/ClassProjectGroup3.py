@@ -1163,7 +1163,7 @@ def predictions():
         parent_dir = os.path.dirname(os.getcwd())
         file_out_path = os.path.join(parent_dir, "data\predictionClassProject3.csv")
         predictions_df.to_csv(file_out_path, index=False)
-        print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} Predictions saved to 'predictionClassProject1.csv'")
+        print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} Predictions saved to 'predictionClassProject3.csv'")
 
         end_time = time.time()
         print(f"\nTime to process: {end_time - start_time:.2f} seconds")
